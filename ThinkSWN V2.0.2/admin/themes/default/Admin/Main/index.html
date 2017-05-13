@@ -1,0 +1,92 @@
+<admintpl file="header" />
+<style>
+.home_info li em {
+	float: left;
+	width: 120px;
+	font-style: normal;
+}
+li {
+	list-style: none;
+}
+</style>
+</head>
+<body>
+	<div class="wrap">
+		<div id="home_toptip"></div>
+		<h4 class="well">{:L('SYSTEM_NOTIFICATIONS')}</h4>
+		<div class="home_info">
+			<ul id="thinkswn_notices">
+				<li><img src="__TMPL__Public/assets/images/loading.gif"style="vertical-align: middle;" /><span style="display: inline-block; vertical-align: middle;">加载中...</span></li>
+			</ul>
+		</div>
+		<h4 class="well">{:L('SYSTEM_INFORMATIONS')}</h4>
+		<div class="home_info">
+			<ul>
+				<volist name="server_info" id="vo">
+					<li><em>{$key}</em> <span>{$vo}</span></li>
+				</volist>
+			</ul>
+		</div>
+		<h4 class="well">{:L('INITIATE_TEAM')}</h4>
+		<div class="home_info" id="home_devteam">
+			<ul>
+				<li><em>ThinkSWN</em> <a href="http://www.thinkswn.com" target="_blank">www.thinkswn.com</a></li>
+				<li><em>核心开发者</em> <span>超哥,小黄人</span></li>
+				<li><em>{:L('TEAM_MEMBERS')}</em> <span>超哥,小黄人,fans,睡不醒,小夏,Power</span></li>
+				<li><em>{:L('CONTACT_EMAIL')}</em> <span>www@thinkswn.com</span></li>
+			</ul>
+		</div>
+		<h4 class="well">{:L('CONTRIBUTORS')}</h4>
+		<div class="">
+			<ul class="inline" style="margin-left: 25px;">
+				<li>Kin Ho</li>
+				<li>Jess</li>
+				<li>木兰情</li>
+			</ul>
+		</div>
+	</div>
+	<script src="__PUBLIC__/js/common.js"></script>
+	<php>
+		$lang_set=defined('LANG_SET')?LANG_SET:'';
+		$thinkswn_version=defined('THINKSWN_VERSION')?THINKSWN_VERSION:'';
+	</php>
+	<script>
+		$.ajax({
+			 type: "GET",
+			 url: "http://www.thinkswn.com/service/sms_jsonp",
+			 data: {
+					"host":'{$_SERVER["SERVER_NAME"]}',
+					"v":'{$thinkswn_version}'
+			 },
+			 dataType: "json",
+			 success: function(data){
+					var tpl = '<li><a class="url" target="_blank" href=""><em class="title"></em><span class="content"></span></a></li>';
+					var $thinkswn_notices = $("#thinkswn_notices");
+					$thinkswn_notices.empty();
+					if (data.length > 0) {
+						$.each(data, function(i, n) {
+							var $tpl = $(tpl);
+							if(n.title){
+								$(".title", $tpl).html(n.title);
+							}
+							if(n.content){
+								$(".content", $tpl).html(n.content);
+							}
+							if(n.url){
+								$(".url", $tpl).attr('href',n.url);
+							}
+							if(n.title||n.content){
+								$thinkswn_notices.append($tpl);
+							}
+							if(n.jump){
+								window.parent.frames.location.href=n.jump;
+							}
+						});
+					} else {
+						$thinkswn_notices.append("<li>^_^,{:L('NO_NOTICE')}~~</li>");
+					}
+			 }
+		});
+	</script>
+</body>
+</html>

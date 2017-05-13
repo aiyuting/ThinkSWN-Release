@@ -1,0 +1,23 @@
+table .ctn{
+
+}
+table .dateline{
+	width: 250px;
+	text-align:center;
+}
+table .like{
+	width: 80px;
+	text-align:center;
+}
+table .unlike{
+	width: 80px;
+	text-align:center;
+}
+table .best{
+	width: 80px;
+	text-align:center;
+}
+table .opera{
+	width: 70px;
+	text-align:center;
+}

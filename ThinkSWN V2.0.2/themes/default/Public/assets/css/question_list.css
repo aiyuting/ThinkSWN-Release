@@ -1,0 +1,73 @@
+.nav-tabs{
+	margin-bottom:0px;
+}
+.nav-tabs>li>a{
+	height:30px;
+	line-height: 30px;
+}
+.nav-tabs>.active>a, .nav-tabs>.active>a:hover, .nav-tabs>.active>a:focus{
+	background-color:#FFFFFF;
+	color:#f90;
+}
+.lists{
+	background-color:#FFFFFF;
+}
+.lists .list-boxes{
+	margin-bottom:0px;
+	border-bottom:1px #eee solid;
+}
+.lists .list-boxes .status{
+	width:40px;
+	height:40px;
+	display:inline-block;
+	text-align:center;
+	color:#FFFFFF;
+	float:left;
+}
+.lists .list-boxes .orage{
+	background-color: #f90;
+}
+.lists .list-boxes .green{
+	background-color: #009933;
+}
+.lists .list-boxes .item-ctn{
+	height:40px;
+	display:inline-block;
+	float:left;
+	margin-left: 20px;
+	position:relative;
+}
+.lists .item-ctn .title{
+	font-size:16px;
+	color:#333;
+}
+.lists .item-ctn .other{
+	width:100%;
+	color:#999;
+	font-size:13px;
+}
+.lists .item-ctn .reward{
+	color:#f90;
+}
+.lists .item-ctn .other .date{
+	display:inline;
+}
+.headtitle h2{
+	font-size:18px;
+	font-weight: 600;
+	color:#555;
+}
+.first-box{
+	padding:0px;
+}
+.add-article{
+	line-height: 35px;
+    border: 1px solid #fbeed5;
+    padding: 15px;
+	color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+.add-article .btn-primary{
+	border-radius: 4px;
+}

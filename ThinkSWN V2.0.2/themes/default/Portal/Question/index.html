@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title><notempty name="best">【已解决】</notempty>{$post_title} <volist name="post_tags" id="vo">{$vo.name}&nbsp;</volist>{$term.name} {$site_name} </title>
+		<meta name="keywords" content="<volist name="post_tags" id="vo">{$vo.name},</volist>{$post_keywords}" />
+		<meta name="description" content="{$post_excerpt|msubstr=0,100}">
+		<tc_include file="Public:head" />
+		<link href="__TMPL__Public/assets/css/question_index.css" rel="stylesheet">
+		<link rel="stylesheet" href="__ROOT__/public/js/ueditor/themes/default/css/ueditor.css" />
+		<link rel="stylesheet" href="__ROOT__/public/js/artDialog/skins/default.css"/>
+		<link rel="stylesheet" href="__ROOT__/public/fancybox/jquery.fancybox-1.3.4.css"/>
+	</head>
+<script>
+	var SITE_URL='__ROOT__';
+</script>
+<body class="">
+<tc_include file="Public:nav" />
+<div class="container tc-main">
+	<div class="row">
+		<div class="span9">
+			<div class="tc-box first-box article-box">
+		    	<h3><notempty name="reward"><span class="reward"><i class="fa fa-database"></i>{$reward}</span></notempty><notempty name="best">【已解决】</notempty>{$post_title}</h3>
+		    	<div id="article_content">
+		    	{$post_content}
+		    	</div>
+		    	<div class="article-infobox">
+					<span><a href="{:leuu('Portal/List/index',array('id'=>$term['term_id']))}">{$term.name}</a></span>
+		    		<span>{$post_date} by {$user_nicename|default=$user_login}</span>
+		    		<span>
+		    			<a href="javascript:;"><i class="fa fa-eye"></i><span>{$post_hits}</span></a>
+						<a href="{:leuu('user/favorite/do_favorite',array('id'=>$article_id))}" rel="nofollow" class="js-favorite-btn" data-title="{$post_title}" data-url="{:leuu('question/index',array('id'=>$article_id,'cid'=>$term_id))}" data-key="{:sp_get_favorite_key('posts',$article_id)}"><i class="fa fa-star-o"></i></a>
+						<a href="javascript:;" class="comment"><i class="fa fa-comment-o"></i><span>{:count($comments)}</span></a>
+					</span>
+		    	</div>
+		    	<div class="article-infobox">
+				<notempty name="post_tags">
+					tags：
+					<volist name="post_tags" id="vo">
+						<span><a href="{:leuu('Portal/Tags/index',array('id'=>$vo['id']))}" target="_blank">{$vo.name}</a></span>&nbsp;
+					</volist>
+				</notempty>
+		    	</div>
+				<hr>
+				<div class="article-answer">
+					<h4>{:count($answers)}个回答</h4>
+					<div class="answer-ul">
+						<volist name="answers" id="vo">
+							<if condition="$vo.isbest eq 1">
+								<div class="answer-li answer-best" id="{$vo.id}" name="{$vo.id}">
+									<div class="info">
+										<div class="avatar"><img src="{$vo.avatar}" /></div>
+										<div class="username">{$vo.username}</div>
+										<h4><i class="fa fa-trophy"></i>最佳答案</h4>
+										<div class="action">
+											<div class="like">
+												<a href="{:leuu('portal/question/answer_do_like',array('id'=>$vo['id']))}" rel="nofollow" class="js-count-btn" title="有用"><i class="fa fa-thumbs-o-up"></i>赞<span class="count">{$vo.likes}</span></a>
+												<a href="{:leuu('portal/question/answer_do_unlike',array('id'=>$vo['id']))}" rel="nofollow" class="js-count-btn" title="没用"><i class="fa fa-thumbs-o-down"></i>踩<span class="count">{$vo.unlikes}</span></a>
+											</div>
+										</div>
+									</div>
+									<div class="ctn">{$vo.ctn}</div>
+								</div>
+							<else />
+								<div class="answer-li" id="{$vo.id}" name="{$vo.id}">
+									<div class="info">
+										<div class="avatar"><img src="{$vo.avatar}" /></div>
+										<div class="username">{$vo.username}</div>
+										<div class="action">
+											<div class="like">
+												<a href="{:leuu('portal/question/answer_do_like',array('id'=>$vo['id']))}" rel="nofollow" class="js-count-btn" title="有用"><i class="fa fa-thumbs-o-up"></i>赞<span class="count">{$vo.likes}</span></a>
+												<a href="{:leuu('portal/question/answer_do_unlike',array('id'=>$vo['id']))}" rel="nofollow" class="js-count-btn" title="没用"><i class="fa fa-thumbs-o-down"></i>踩<span class="count">{$vo.unlikes}</span></a>
+											</div>
+											<if condition="($post_author eq sp_get_current_userid()||current_user_is_admin())&&$best eq ''">
+											<div class="best">
+												<a href="{:leuu('portal/question/answer_do_best',array('id'=>$vo['id']))}" rel="nofollow" class="js-count-btn" title="采纳"><i class="fa fa-check-square-o"></i><span>采纳</span></a>
+											</div>
+											</if>
+										</div>
+									</div>
+									<div class="ctn">{$vo.ctn}</div>
+								</div>
+							</if>
+						</volist>
+					</div>
+					<form id="form" class="form-horizontal js-ajax-form" action="{:leuu('portal/question/add_answer')}" method="post">
+						<script type="text/plain" id="answer" style="width:100%;height:180px;"  name="answer"></script>
+						<input type="hidden" name="qid" id="qid" value="{$article_id}">
+						<input type="hidden" name="type" id="type" value="answer">
+						<button type="button" class="btn pull-right btn-primary js-ajax-submit" data-wait="1500">提交答案</button>
+					</form>
+				</div>
+				<div class="comment-box">
+					{:hook('comment',array(
+						'post_id'=>$article_id,
+						'post_table'=>'posts',
+						'post_title'=>$post_title
+					))}
+				</div>
+		    </div>
+		    
+		    <php>$ad=sp_getad("portal_article_bottom");</php>
+			<if condition="!empty($ad)">
+        	<div class="tc-box">
+	        	<div class="headtitle">
+	        		<h2>广告</h2>
+	        	</div>
+	        	<div>
+		        	{$ad}
+		        </div>
+			</div>
+			</if>
+		    
+		</div>
+		<div class="span3">
+			<div class="tc-box first-box">
+     			<div class="add-article">
+					<span>今天，你遇到什么问题呢？</span>
+					<a href="{:leuu('question/create')}" class="btn btn-primary btn-block" rel="nofollow">我要提问</a>
+				</div>
+        	</div>
+        	
+			<div class="tc-box">
+	        	<div class="headtitle">
+	        		<h2>热门文章</h2>
+	        	</div>
+	        	<php>
+					$host_articles=sp_sql_posts("field:post_title,post_excerpt,post_content,object_id,term_id,smeta;order:post_hits desc;limit:4;where:type='article';"); 
+				</php>
+	        	<div class="posts">
+	        		<foreach name="host_articles" item="vo">
+	        		<php>$smeta=json_decode($vo['smeta'],true);</php>
+			        	<dl class="dl-horizontal">
+				            <dt>
+					            <a class="img-wraper" href="{:leuu('article/index',array('id'=>$vo['object_id']))}">
+					            	<if condition="empty($smeta['thumb'])"> 
+										<img src="__TMPL__Public/assets/images/default_tupian4.png" class="img-responsive" alt="{$vo.post_title}"/>
+									<else /> 
+										<img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}" />
+									</if>
+					            </a>
+				            </dt>
+				            <dd><a href="{:leuu('article/index',array('id'=>$vo['object_id']))}">{$vo.post_title}</a></dd>
+				        </dl>
+			        </foreach>
+		        </div>
+			</div>
+			<div class="tc-box">
+	        	<div class="headtitle">
+	        		<h2>最新文章</h2>
+	        	</div>
+	        	<php>
+					$last_post=sp_sql_posts("field:post_title,post_excerpt,post_content,object_id,term_id,smeta;order:listorder asc;limit:4;where:type='article';"); 
+				</php>
+	        	<div class="posts">
+	        		<foreach name="last_post" item="vo">
+	        		<php>$smeta=json_decode($vo['smeta'],true);</php>
+			        	<dl class="dl-horizontal">
+				            <dt>
+					            <a class="img-wraper" href="{:leuu('article/index',array('id'=>$vo['object_id']))}">
+					            	<if condition="empty($smeta['thumb'])"> 
+										<img src="__TMPL__Public/assets/images/default_tupian4.png" class="img-responsive" alt="{$vo.post_title}"/>
+									<else /> 
+										<img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}" />
+									</if>
+					            </a>
+				            </dt>
+				            <dd><a href="{:leuu('article/index',array('id'=>$vo['object_id']))}">{$vo.post_title}</a></dd>
+				        </dl>
+			        </foreach>
+		        </div>
+			</div>
+			
+			<div class="tc-box">
+	        	<div class="headtitle">
+	        		<h2>最新加入</h2>
+	        	</div>
+	        	<php>
+	        	$last_users=sp_get_users("field:*;limit:0,8;order:create_time desc;");
+	        	</php>
+	        	<ul class="list-unstyled tc-photos margin-bottom-30">
+	        		<foreach name="last_users" item="vo">
+                    <li>
+	                    <a href="{:leuu('user/index/index',array('id'=>$vo['id']))}" rel="nofollow">
+	                    <img alt="{$vo['user_nicename']}" title="{$vo['user_nicename']}"  src="{:leuu('user/public/avatar',array('id'=>$vo['id']))}">
+	                    </a>
+                    </li>
+                    </foreach>
+                </ul>
+			</div>
+			
+        	<div class="tc-box">
+	        	<div class="headtitle">
+	        		<h2>最新问题</h2>
+	        	</div>
+	        	<div class="ranking">
+	        		<php>
+						$last_questions=sp_sql_posts("field:post_title,post_excerpt,object_id,term_id,smeta;order:post_date desc;limit:5;where:type='question';"); 
+					</php>
+		        	<ul class="unstyled">
+		        		<foreach name="last_questions" item="vo">
+		        			<php>$top=$key<3?"top3":"";</php>
+							<li class="{$top}"><i>{$key+1}</i><a title="{$vo.post_title}" href="{:leuu('question/index',array('id'=>$vo['object_id']))}">{$vo.post_title}</a></li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+			
+			<php>$ad=sp_getad("common_right_aside");</php>
+			<if condition="!empty($ad)">
+        	<div class="tc-box">
+	        	<div class="headtitle">
+	        		<h2>赞助商</h2>
+	        	</div>
+	        	<div>
+		        	{$ad}
+		        </div>
+			</div>
+			</if>
+		</div>
+	</div>  
+<tc_include file="Public:footer"/>
+</div>
+<tc_include file="Public:scripts"/>
+<script type="text/javascript" src="__ROOT__/public/js/ueditor/ueditor.frontend.config.js"></script>
+<script type="text/javascript" src="__ROOT__/public/js/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" src="__TMPL__Public/assets/js/question_index.js"></script>
+<script type="text/javascript" src="__ROOT__/public/fancybox/jquery.fancybox-1.3.4.js"></script>
+<script type="text/javascript">
+	var editorURL = GV.WEB_ROOT;
+	var editor = new baidu.editor.ui.Editor();
+	var content=editor.render("answer");
+</script>
+<php>
+	$zz_settings=sp_get_option('zz_settings');
+	echo htmlspecialchars_decode($zz_settings['baidu_code']);
+	echo htmlspecialchars_decode($zz_settings['360_code']);
+</php>
+</body>
+</html>

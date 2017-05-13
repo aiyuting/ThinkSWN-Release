@@ -1,0 +1,16 @@
+table .thumb{
+	width: 50px;
+	text-align:center;
+}
+table .dateline{
+	width: 150px;
+	text-align:center;
+}
+table .comment{
+	width: 30px;
+	text-align:center;
+}
+table .opera{
+	width: 70px;
+	text-align:center;
+}

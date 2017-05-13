@@ -1,0 +1,103 @@
+#article_content img{height:auto !important}
+#article_content {
+	word-wrap: break-word;
+	overflow: hidden;
+}
+.article-box h3{
+	font-size:20px;
+}
+.article-box .reward{
+	color:#f90;
+	margin-right:5px;
+}
+.article-answer{
+    padding-bottom: 20px;	
+}
+.article-answer h4{
+	font-size:16px;
+	font-weight:300;
+}
+.article-answer .js-ajax-submit{
+    margin-top: 10px;
+}
+.article-answer .answer-ul{
+	margin-bottom:10px;
+	overflow: hidden;
+}
+.article-answer .answer-ul .answer-li{
+	border-bottom:1px #eee solid;
+	padding: 10px 10px 0px 10px;
+}
+.article-answer .answer-ul .avatar{
+	display:inline-block;
+}
+.article-answer .answer-ul .avatar img{
+	width:40px;
+	height:40px;
+	border-radius:20px;
+}
+.article-answer .answer-ul .username{
+	display:inline-block;
+	color:#009933;
+	font-weight:bold;
+}
+.article-answer .answer-ul .action{
+	display:inline-block;
+	float:right;
+}
+.article-answer .answer-ul .action .like{
+	display:inline-block;
+	border:1px #eee solid;
+	padding:5px 10px;
+	border-radius:20px;
+}
+.article-answer .answer-ul .action .best{
+	display:inline-block;
+	border:1px #eee solid;
+	padding:5px 10px;
+	border-radius:20px;
+}
+.article-answer .answer-ul .ctn{
+	padding-left:40px;
+	word-wrap: break-word;
+}
+.article-answer  .answer-li.answer-best{
+	border:1px #faebcc solid;
+	filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=#faebcc,endcolorstr=#FFFFFF,gradientType=0);
+    -ms-filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=#faebcc,endcolorstr=#FFFFFF,gradientType=0);/*IE8*/	
+    background:#FFFFFF; /* 一些不支持背景渐变的浏览器 */  
+    background:-moz-linear-gradient(top, #faebcc, #FFFFFF);  
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#faebcc), to(#FFFFFF));  
+    background:-o-linear-gradient(top, #faebcc, #FFFFFF); 
+}
+.article-answer  .answer-li.answer-best  h4{
+	font-size:16px;
+	font-weight:300;
+	color:#ad3a37;
+	display:inline-block;
+}
+.headtitle h2{
+	font-size:18px;
+	font-weight: 600;
+	color:#555;
+}
+.first-box{
+	padding:0px;
+}
+.add-article{
+	line-height: 35px;
+    border: 1px solid #fbeed5;
+    padding: 15px;
+	color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+.add-article .btn-primary{
+	border-radius: 4px;
+}
+.fa-comment{
+	color:#f90;
+}
+.comment-box{
+	display:none;
+}

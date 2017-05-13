@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{$name} {$seo_title} {$site_name}</title>
+	<meta name="keywords" content="{$name},{$seo_keywords}" />
+	<meta name="description" content="{$seo_description}">
+    <tc_include file="Public:head" />
+	<link href="__TMPL__Public/assets/css/list.css" rel="stylesheet">
+</head>
+<php>
+	$answers_model=M('answers');
+</php>
+<body>
+<tc_include file="Public:nav" />
+<div class="container tc-main">
+    <h2>{$name}</h2>
+    <div class="row">
+		<div class="span9 lists">
+			<div class="">
+				<php>
+					$lists = sp_sql_posts_paged("cid:$cat_id;order:post_date DESC;",10);
+					foreach($lists['posts'] as $key=>$val){
+						if(!$val['post_excerpt']){
+							$lists['posts'][$key]['post_excerpt']=strip_tags($val['post_content']);
+						}
+						$lists['posts'][$key]['answers']=$answers_model->where(array('qid'=>$val['object_id']))->count();
+					}
+				</php>
+				<volist name="lists['posts']" id="vo">
+				<php>
+					$smeta=json_decode($vo['smeta'], true);
+				</php>
+				<if condition="$vo.type eq 'article'">
+				<div class="list-boxes article">
+					<div class="item-image">
+						<a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank" rel="nofollow">
+							<img src="{:sp_get_asset_upload_path($smeta['thumb']?$smeta['thumb']:'__TMPL__Public/assets/images/default_tupian1.png')}"class="img-responsive" alt="{$vo.post_title}">
+						</a>
+					</div>
+					<div class="item-ctn">
+						<h2><b><a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">{$vo.post_title}</a></b></h2>
+						<p>{$vo.post_excerpt|msubstr=0,180}</p>
+						<a class="more" href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank" rel="nofollow">阅读全文</a>
+						<div class="other">
+							<div class="date">{$vo.post_date}</div>
+							<div class="action">
+								<a href="javascript:;"><i class="fa fa-eye"></i><span>{$vo.post_hits}</span></a>
+								<a href="{:leuu('article/do_like',array('id'=>$vo['object_id']))}" rel="nofollow" class="js-count-btn"><i class="fa fa-thumbs-up"></i><span class="count">{$vo.post_like}</span></a>
+								<a href="{:leuu('user/favorite/do_favorite',array('id'=>$vo['object_id']))}" rel="nofollow" class="js-favorite-btn" data-title="{$vo.post_title}" data-url="{:leuu('portal/article/index',array('id'=>$vo['object_id'],'cid'=>$vo['term_id']))}" data-key="{:sp_get_favorite_key('posts',$vo['object_id'])}">
+									<i class="fa fa-star-o"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<else/>
+				<a href="{:leuu('question/index',array('id'=>$vo['object_id']))}" target="_blank">
+					<div class="list-boxes question">
+						<if condition="$vo.best gt 0">
+							<div class="status green">
+								<div>{$vo.answers}</div>
+								<div>解决</div>
+							</div>	
+						<else/>
+							<div class="status orage">
+								<div>{$vo.answers}</div>
+								<div>回答</div>
+							</div>
+						</if>
+						<div class="item-ctn">
+							<div class="other">
+								<span class="username">{$vo.user_nicename}</span>
+								<span class="date">{$vo.post_date}</span>
+							</div>
+							<notempty name="vo.reward">
+								<span class="reward"><i class="fa fa-database"></i>{$vo.reward}</span>
+							</notempty>
+							<span class="title">{$vo.post_title}</span>
+						</div>
+					</div>
+				</a>
+				</if>
+				</volist>
+				
+			</div>
+			<div class="pagination"><ul>{$lists['page']}</ul></div>
+		</div>
+		<div class="span3">
+			<div class="tc-box first-box">
+     			<div class="add-article">
+					<a href="{:leuu('question/create')}" class="btn btn-warning btn-block" rel="nofollow">我要提问</a>
+					<a href="{:leuu('article/add')}" class="btn btn-primary btn-block" rel="nofollow">分享经验</a>
+				</div>
+        	</div>
+        	
+			<div class="tc-box">
+	        	<div class="headtitle">
+	        		<h2>热门文章</h2>
+	        	</div>
+	        	<php>
+					$host_articles=sp_sql_posts("field:post_title,post_excerpt,post_content,object_id,term_id,smeta;order:post_hits desc;limit:4;where:type='article';"); 
+				</php>
+	        	<div class="posts">
+	        		<foreach name="host_articles" item="vo">
+	        		<php>$smeta=json_decode($vo['smeta'],true);</php>
+			        	<dl class="dl-horizontal">
+				            <dt>
+					            <a class="img-wraper" href="{:leuu('article/index',array('id'=>$vo['object_id']))}">
+					            	<if condition="empty($smeta['thumb'])"> 
+										<img src="__TMPL__Public/assets/images/default_tupian4.png" class="img-responsive" alt="{$vo.post_title}"/>
+									<else /> 
+										<img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}" />
+									</if>
+					            </a>
+				            </dt>
+				            <dd><a href="{:leuu('article/index',array('id'=>$vo['object_id']))}">{$vo.post_title}</a></dd>
+				        </dl>
+			        </foreach>
+		        </div>
+			</div>
+			<div class="tc-box">
+	        	<div class="headtitle">
+	        		<h2>最新文章</h2>
+	        	</div>
+	        	<php>
+					$last_post=sp_sql_posts("field:post_title,post_excerpt,post_content,object_id,term_id,smeta;order:listorder asc;limit:4;where:type='article';"); 
+				</php>
+	        	<div class="posts">
+	        		<foreach name="last_post" item="vo">
+	        		<php>$smeta=json_decode($vo['smeta'],true);</php>
+			        	<dl class="dl-horizontal">
+				            <dt>
+					            <a class="img-wraper" href="{:leuu('article/index',array('id'=>$vo['object_id']))}">
+					            	<if condition="empty($smeta['thumb'])"> 
+										<img src="__TMPL__Public/assets/images/default_tupian4.png" class="img-responsive" alt="{$vo.post_title}"/>
+									<else /> 
+										<img src="{:sp_get_asset_upload_path($smeta['thumb'])}" class="img-responsive img-thumbnail" alt="{$vo.post_title}" />
+									</if>
+					            </a>
+				            </dt>
+				            <dd><a href="{:leuu('article/index',array('id'=>$vo['object_id']))}">{$vo.post_title}</a></dd>
+				        </dl>
+			        </foreach>
+		        </div>
+			</div>
+			
+			<div class="tc-box">
+	        	<div class="headtitle">
+	        		<h2>最新加入</h2>
+	        	</div>
+	        	<php>
+	        	$last_users=sp_get_users("field:*;limit:0,8;order:create_time desc;");
+	        	</php>
+	        	<ul class="list-unstyled tc-photos margin-bottom-30">
+	        		<foreach name="last_users" item="vo">
+                    <li>
+	                    <a href="{:leuu('user/index/index',array('id'=>$vo['id']))}" rel="nofollow">
+	                    <img alt="{$vo['user_nicename']}" title="{$vo['user_nicename']}" src="{:leuu('user/public/avatar',array('id'=>$vo['id']))}">
+	                    </a>
+                    </li>
+                    </foreach>
+                </ul>
+			</div>
+			
+        	<div class="tc-box">
+	        	<div class="headtitle">
+	        		<h2>最新问题</h2>
+	        	</div>
+	        	<div class="ranking">
+	        		<php>
+						$last_questions=sp_sql_posts("field:post_title,post_excerpt,object_id,term_id,smeta;order:post_date desc;limit:5;where:type='question';"); 
+					</php>
+		        	<ul class="unstyled">
+		        		<foreach name="last_questions" item="vo">
+		        			<php>$top=$key<3?"top3":"";</php>
+							<li class="{$top}"><i>{$key+1}</i><a title="{$vo.post_title}" href="{:leuu('question/index',array('id'=>$vo['object_id']))}">{$vo.post_title}</a></li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+			
+			<php>$ad=sp_getad("common_right_aside");</php>
+			<if condition="!empty($ad)">
+        	<div class="tc-box">
+	        	<div class="headtitle">
+	        		<h2>赞助商</h2>
+	        	</div>
+	        	<div>
+		        	{$ad}
+		        </div>
+			</div>
+			</if>
+		</div>
+    </div>
+    <tc_include file="Public:footer" />
+</div>    
+<!-- JavaScript -->
+<tc_include file="Public:scripts" />
+<php>
+	$zz_settings=sp_get_option('zz_settings');
+	echo htmlspecialchars_decode($zz_settings['baidu_code']);
+	echo htmlspecialchars_decode($zz_settings['360_code']);
+</php>
+</body>
+</html>

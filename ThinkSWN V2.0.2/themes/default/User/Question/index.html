@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>我的问题 {$site_name}</title>
+<meta name="keywords" content="" />
+<meta name="description" content="">
+<meta name="author" content="ThinkSWN">
+<tc_include file="Public:head" />
+<link href="__TMPL__Public/assets/css/my_article.css" rel="stylesheet">
+</head>
+
+<body class="body-white" id="top">
+	<tc_include file="Public:nav" />
+
+	<div class="container tc-main">
+		<div class="row">
+			<div class="span3">
+				<tc_include file="Public:usernav" />
+			</div>
+			<div class="span9">
+				<div class="tabs">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#one" data-toggle="tab"><i class="fa fa-file-text"></i> 我的问题</a></li>
+						<li><a href="{:leuu('/question/create')}"><i class="fa fa-plus"></i> 发布问题</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="one">
+							<table class="table table-bordered table-striped table-hover">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>问题</th>
+										<th class="dateline">提问时间</th>
+										<th class="dateline">最后更新时间</th>
+										<th class="comment">评论</th>
+										<th class="answer">回答</th>
+										<th class="opera">操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<foreach name="questions" item="vo">
+									<tr>
+										<td>{$vo.id}</td>
+										<td><a target="_blank" href="{:leuu('portal/question/index',array('id'=>$vo['id']))}">{$vo.post_title}</a></td>
+										<td>{$vo.post_date}</td>
+										<td>{$vo.post_modified}</td>
+										<td>{$vo.comment_count}</td>
+										<td>{$vo.answer_count}</td>
+										<td>
+											<a target="_blank" href="{:leuu('portal/question/edit',array('id'=>$vo['id']))}">编辑</a> | 
+											<a href="{:leuu('portal/question/del',array('id'=>$vo['id']))}">删除</a>
+										</td>
+									</tr>
+									</foreach>
+								</tbody>
+							</table>
+							<div class="pagination"><ul>{$page}</ul></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<tc_include file="Public:footer" />
+
+	</div>
+	<!-- /container -->
+
+	<tc_include file="Public:scripts" />
+</body>
+</html>

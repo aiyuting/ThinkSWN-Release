@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html mip>
+	<head>
+		<meta charset="utf-8" />
+		<title>{$post_title}
+			<volist name="post_tags" id="vo">{$vo.name}&nbsp;</volist>{$term.name} {$site_name}</title>
+		<meta name="keywords" content="<volist name="post_tags" id="vo ">{$vo.name},</volist>{$post_keywords}"/>
+		<meta name="description" content="{$post_excerpt|msubstr=0,100}" />
+		<meta name="applicable-device" content="mobile" />
+		<meta http-equiv="Cache-Control" content="no-transform" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="https://mipcache.bdstatic.com/static/v1/mip.css">
+		<php>
+			$canonical=sp_get_host().$_SERVER['REQUEST_URI'];
+		</php>
+		<link rel="canonical" href="{$canonical}">
+		<style mip-custom>
+			body {
+				background: #fff;
+				font-size: 12px;
+				color: #000;
+				font-family: "\5B8B\4F53", arial;
+				margin: 0;
+				padding: 0;
+				text-align: center;
+			}
+			
+			header,
+			section,
+			article,
+			aside,
+			nav,
+			video {
+				background: #fff;
+			}
+			
+			.ot:after {
+				content: "";
+				display: block;
+				visibility: hidden;
+				clear: both;
+				height: 0;
+			}
+			
+			.clearfloat {
+				clear: both;
+				float: none;
+			}
+			
+			.topnav {
+				width: 100%;
+				height: 45px;
+				background: #009933;
+				overflow: hidden;
+			}
+			
+			.topnav .cname{
+				text-align: left;
+				height: 45px;
+				line-height: 45px;
+				font-size: 18px;
+				color: #fff;
+				position: absolute;
+				padding-left:10px;
+			}
+			.topnav .cname span{
+				color: #fff;
+				padding-right:10px;
+			}
+			.topnav .cname a{
+				color: #fff;
+			}
+			.neiye {
+				width: 100%;
+				margin: auto;
+				overflow: hidden;
+				background: #fff;
+				border-bottom: 1px solid #dfdfdf;
+			}
+			
+			.marticle {
+				width: 100%;
+				margin: auto;
+			}
+			
+			.AcTtile {
+				margin-top: 12px;
+				width: 94%;
+				float: none;
+				margin: auto;
+				margin-top: 10px;
+			}
+			
+			.AcTtile h1 {
+				font-size: 22px;
+				line-height: 30px;
+				font-family: "\9ED1\4F53", "\5FAE\8F6F\96C5\9ED1";
+				text-align: left;
+				padding-left: 0;
+			}
+			
+			.ArtInfo {
+				width: 90%;
+				margin: auto;
+				padding-top: 6px;
+				color: #616161;
+				padding-left: 0;
+				overflow: hidden;
+				height: 19px;
+				font-size: 12px;
+				text-align: left;
+				overflow: hidden;
+				border-bottom: 1px dashed #ececec;
+				height: 22px;
+				line-height: 22px;
+			}
+			
+			.ArtCon {
+				width: 92%;
+				margin: auto;
+				line-height: 32px;
+				font-size: 18px;
+				text-align: justify;
+				margin-top: 0px;
+				overflow: hidden
+			}
+			
+			.ArtCon img {
+				width: 100%;
+			}
+			
+			.ArtCon p {
+				padding-top: 0;
+				font-size: 18px;
+				line-height: 32px;
+				margin: 0;
+				line-height: 1.6em;
+				font-size: 0.95em;
+				padding: 3% 0;
+			}
+			
+			.ArtCon * {
+				font-size: 18px;
+				font-size: 0.95em;
+			}
+			
+			.artdaoyuty {
+				margin-top: 12px;
+			}
+			
+			
+			.mip-embedbd {
+				margin-top: 12px;
+			}
+			/*列表第二种样式*/
+			
+			.newlist2 {
+				width: 100%;
+				margin: 0px auto;
+				overflow: hidden;
+			}
+			
+			.newlist2 li {
+				height: 80px;
+				padding: 10px 0px;
+				border-bottom: 1px solid #dfdfdf;
+				list-style-type: none;
+			}
+			
+			.newlist2 li .list_img2 {
+				float: left;
+				width: 32%;
+				max-height: 80px;
+				overflow: hidden;
+			}
+			
+			.newlist2 li .list_img2 img {
+				width: 100%;
+			}
+			
+			.newlist2 li .list_cont {
+				width: 66%;
+				float: right;
+				text-align: left;
+			}
+			
+			.newlist2 li .list_title2 {
+				line-height: 30px;
+				font-size: 18px;
+				font-family: "微软雅黑";
+				font-weight: 500;
+				height: 60px;
+				overflow: hidden;
+				padding-top: 6px;
+			}
+			
+			.newlist2 li .list_title2 a {
+				font-size: 18px;
+			}
+			
+			.newlist2 li .list_time2 {
+				height: 28px;
+				line-height: 28px;
+				margin-top: -6px;
+				display: none;
+			}
+			
+			.newlist2 li .list_time2 p {
+				display: inline-block;
+				color: #999;
+			}
+			
+			.newlist2 li .list_time2 p b {
+				background: #f05b5b;
+				color: #fff;
+				font-weight: 100;
+				font-size: 12px;
+				padding: 0px 2px;
+				margin-right: 5px;
+			}
+			.footer{
+			    height: 50px;
+				line-height: 50px;
+				color: #616161;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header>
+			<nav class="topnav">
+				<div class="cname">
+					<span><a href="__ROOT__/">{$site_name}</a></span>>>
+					<span><a href="{:leuu('Portal/List/index',array('id'=>$term['term_id']))}">{$term.name}</a></span>>>
+					<span>正文</span>
+				</div>
+			</nav>
+		</header>
+		<div class="mip-html">
+			<section class="neiye">
+				<article class="marticle">
+					<div class="AcTtile">
+						<h1>{$post_title}</h1>
+					</div>
+				</article>
+				<div class="ArtInfo">
+					<span class="cL">
+						<span class="ac_time">{$post_date}</span>
+						<span class="aced_name"> 作者：</span><span class="aced_con">{$user_nicename|default=$user_login}</span>
+						<span class="aced_name"> 浏览量：</span><span class="aced_con">{$post_hits}</span>
+					</span>
+				</div>
+				<div class="ArtCon">{$post_content}</div>
+			</section>
+			<div class="newlist2">
+				<ul>
+					<php>
+						$last_post=sp_sql_posts("field:post_date,post_title,post_excerpt,post_content,object_id,term_id,smeta;order:listorder asc;limit:4;where:type='article';"); 
+					</php>
+					<foreach name="last_post" item="vo">
+					<php>$smeta=json_decode($vo['smeta'],true);</php>
+					<li>
+						<div class="list_img2">
+							<a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">
+								<mip-img data-carousel="carousel" class="mip-element mip-img" src="{:sp_get_asset_upload_path($smeta['thumb']?$smeta['thumb']:'__TMPL__Public/assets/images/default_tupian1.png')}"></mip-img>
+							</a>
+						</div>
+						<div class="list_cont">
+							<div class="list_title2">
+								<a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">{$vo.post_title}</a>
+							</div>
+							<div class="list_time2">
+								<p><b>新</b>{$vo.post_date}</p>
+								<span class="list_fx2"></span></div>
+						</div>
+						<div class="clearfloat"></div>
+					</li>
+					</foreach>
+				</ul>
+			</div>
+		</div>
+		<tc_include file="Public:footer"/>
+	</body>
+
+</html>

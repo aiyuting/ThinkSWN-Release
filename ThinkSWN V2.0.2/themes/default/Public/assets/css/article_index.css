@@ -1,0 +1,27 @@
+#article_content img{height:auto !important}
+#article_content {word-wrap: break-word;}
+.headtitle h2{
+	font-size:18px;
+	font-weight: 600;
+	color:#555;
+}
+.first-box{
+	padding:0px;
+}
+.add-article{
+	line-height: 35px;
+    border: 1px solid #fbeed5;
+    padding: 15px;
+	color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+.add-article .btn-primary{
+	border-radius: 4px;
+}
+.fa-comment{
+	color:#f90;
+}
+.comment-box{
+	display:none;
+}

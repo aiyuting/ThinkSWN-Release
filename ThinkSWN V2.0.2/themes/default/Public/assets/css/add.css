@@ -1,0 +1,26 @@
+.input-title{
+	width:100%;
+	border-radius: 6px !important;
+}
+.input-cid{
+	border-radius: 6px !important;
+}
+.input-reward{
+	width:50px;
+	border-radius: 6px !important;
+}
+.input-tag{
+	border-radius: 6px !important;
+}
+div.tagsinput{
+	border-radius: 6px !important;
+	overflow-y: hidden !important;
+}
+.btn-primary,.btn-primary:focus{
+	border-color: #008151;
+    background-color: #009933;
+}
+.btn-primary:hover,.btn-primary:active,.btn-primary.disabled,.btn-primary[disabled]{
+    border-color: #00432a;
+    background-color: #006741;
+}

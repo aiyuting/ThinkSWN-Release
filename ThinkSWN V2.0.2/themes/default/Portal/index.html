@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<title>{$site_name} {$site_seo_title}</title>
+		<meta name="keywords" content="{$site_seo_keywords}" />
+		<meta name="description" content="{$site_seo_description}">
+		<tc_include file="Public:head" />
+		<link href="__TMPL__Public/assets/css/index.css" rel="stylesheet">
+		<link href="__TMPL__Public/assets/css/slippry/slippry.css" rel="stylesheet">
+	</head>
+	<body>
+	<tc_include file="Public:nav" />
+	<div class="container">
+		<div class="main">
+			<div class="widget-box-title">最新推荐</div>
+			<div class="block-tr">
+				<div class="block-td">
+					<php>
+					$home_slides=sp_getslide("portal_index",5,"slide_id desc");
+					
+					$home_slides=empty($home_slides)?$default_home_slides:$home_slides;
+					</php>
+					<ul id="homeslider" class="unstyled">
+						<foreach name="home_slides" item="vo">
+						<li>
+							<div class="caption-wraper">
+								<div class="caption">{$vo.slide_name}</div>
+							</div>
+							<a href="{$vo.slide_url}" target="_blank"><img src="{:sp_get_asset_upload_path($vo['slide_pic'])}" alt="{$vo.slide_name}"></a>
+						</li>
+						</foreach>
+					</ul>
+				</div>
+				<div class="block-td">
+					<php>
+						$recommendnews=sp_sql_posts("field:post_title,post_excerpt,object_id,smeta,term_id;order:istop desc,recommended desc,listorder asc,post_like desc,post_hits desc,post_date desc;limit:10;"); 
+					</php>
+					<div class="list">
+						<foreach name="recommendnews" item="vo">
+							<a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">{$vo.post_title}</a>
+						</foreach>
+					</div>
+				</div>
+			</div>
+			<div class="block-tr">
+				<div class="block-td">
+					<div class="widget-box-title">热门文章</div>
+					<php>
+						$hostnews=sp_sql_posts("field:post_title,post_excerpt,object_id,smeta,term_id;order:post_hits desc,post_date desc;limit:10;where:type='article';"); 
+					</php>
+					<div class="list">
+						<foreach name="hostnews" item="vo">
+							<a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">{$vo.post_title}</a>
+						</foreach>
+					</div>
+				</div>
+				<div class="block-td">
+					<div class="widget-box-title">悬赏问题</div>
+					<php>
+						$rewardquestions=sp_sql_posts("field:post_title,post_excerpt,object_id,smeta,term_id,reward;order:post_date desc;limit:10;where:reward>0&&type='question';"); 
+					</php>
+					<div class="list">
+						<foreach name="rewardquestions" item="vo">
+							<a href="{:leuu('question/index',array('id'=>$vo['object_id']))}" target="_blank"><span class="coin"><i class="fa fa-database"></i>{$vo.reward}</span>{$vo.post_title}</a>
+						</foreach>
+					</div>
+				</div>
+			</div>
+			<div class="block-tr">
+				<div class="block-td">
+					<div class="widget-box-title">最新文章</div>
+					<php>
+						$lastnews=sp_sql_posts("field:post_title,post_excerpt,object_id,smeta,term_id;order:post_date desc;limit:10;where:type='article';"); 
+					</php>
+					<div class="list">
+						<foreach name="lastnews" item="vo">
+							<a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">{$vo.post_title}</a>
+						</foreach>
+					</div>
+				</div>
+				<div class="block-td">
+					<div class="widget-box-title">最新问题</div>
+					<php>
+						$lastquestions=sp_sql_posts("field:post_title,post_excerpt,object_id,smeta,term_id;order:post_date desc;limit:10;where:type='question';"); 
+					</php>
+					<div class="list">
+						<foreach name="lastquestions" item="vo">
+							<a href="{:leuu('question/index',array('id'=>$vo['object_id']))}" target="_blank">{$vo.post_title}</a>
+						</foreach>
+					</div>
+				</div>
+			</div>
+			<div class="block-tr">
+				<div class="widget-box-title">推荐专家</div>
+				<php>
+					$experts=sp_get_users("limit:0,10;order:coin desc;where:expert=1");
+				</php>
+				<div class="row experts">
+					<foreach name="experts" item="vo">
+					<php>$smeta=json_decode($vo['smeta'],true);</php>
+					<div class="span2">
+						<div class="tc-gridbox">
+							<div class="header">
+								<div class="item-image">
+									<a href="{:leuu('user/index/index',array('id'=>$vo['id']))}" target="_blank" rel="nofollow">
+										<img src="{:leuu('user/public/avatar',array('id'=>$vo['id']))}" class="img-responsive img-thumbnail" alt="{$vo['user_nicename']}" />
+									</a>
+								</div>
+								<h3  class="text-center"><a href="{:leuu('user/index/index',array('id'=>$vo['id']))}" target="_blank" rel="nofollow">{$vo['user_nicename']}</a></h3>
+							</div>
+							<div class="body">
+								<p class="text-center"><a class="btn btn-primary btn-sm" href="{:leuu('question/create',array('to_user_id'=>$vo['id']))}" target="_blank" rel="nofollow">向TA提问</a></p>
+							</div>
+						</div>
+					</div>
+					</foreach>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="block-tr">
+				<div class="btns">
+					<a href="{:leuu('question/create')}" class="btn btn-warning btn-block" target="_blank" rel="nofollow">我要提问</a>
+					<a href="{:leuu('article/add')}" class="btn btn-primary btn-block" target="_blank" rel="nofollow">分享经验</a>
+				</div>
+			</div>
+			<!--
+			<div class="block-tr">
+				<div class="widget-box-title">最新公告</div>
+				<div class="notice"><a href="" target="_blank" rel="nofollow">本站微信小程序已上线，欢迎大家使用！</a></div>
+			</div>
+			-->
+			<div class="block-tr">
+				<div class="my">
+					<a class="text-left" href="{:leuu('user/question/index')}" target="_blank" rel="nofollow">我的提问</a>
+					<a class="text-right" href="{:leuu('user/answer/index')}" target="_blank" rel="nofollow">我的回答</a>
+					<a class="text-left" href="" target="_blank" rel="nofollow">受邀回答</a>
+					<a href="{:leuu('user/article/index')}" class="text-right" target="_blank" rel="nofollow">我的文章</a>
+					<a href="{:leuu('user/favorite/index')}" class="text-left" target="_blank" rel="nofollow">我的收藏</a>
+					<a href="{:leuu('comment/comment/index')}" class="text-right" target="_blank" rel="nofollow">我的评论</a>
+				</div>
+			</div>
+			<div class="block-tr">
+				<div class="widget-box-title">热议话题</div>
+				<div class="topic">
+					<php>
+						$hot_tags=sp_get_hot_tags("field:*;limit:0,30;order:num desc;");
+					</php>
+					<foreach name="hot_tags" item="vo">
+						<a href="{:leuu('Portal/Tags/index',array('id'=>$vo['id']))}" target="_blank">{$vo['name']}</a>&nbsp;
+					</foreach>
+				</div>
+			</div>
+			<div class="block-tr">
+				<div class="widget-box-title">财富榜</div>
+					<php>
+					$coin_users=sp_get_users("field:*;limit:0,10;order:coin desc;");
+					</php>
+					<ol class="rank">
+						<foreach name="coin_users" item="vo">
+						<li>
+							<img class="avatar" src="{:leuu('user/public/avatar',array('id'=>$vo['id']))}" title="{$vo['user_nicename']}" alt="{$vo['user_nicename']}">
+							<a href="{:leuu('user/index/index',array('id'=>$vo['id']))}" class="username" target="_blank" title="{$vo['user_nicename']}" rel="nofollow">{$vo['user_nicename']}</a>
+							<span class="coin">{$vo['coin']} 金币</span>
+						</li>
+						</foreach>
+					</ol>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="links">
+		友情链接：
+			<php>
+				$links=sp_getlinks();
+				$isrobot=checkrobot();
+			</php>
+			<a href="http://www.thinkswn.com" target="_blank">ThinkSWN</a>
+			<a href="http://www.soswen.com" target="_blank">搜问</a>
+			<foreach name="links" item="vo">
+				<php>
+					if($isrobot){
+				</php>
+						<a href="{$vo.link_url}" rel="external nofollow" target="{$vo.link_target}">{$vo.link_name}</a>
+				<php>	
+					}else{
+				</php>
+						<a href="{$vo.link_url}" target="{$vo.link_target}">{$vo.link_name}</a>
+				<php>
+					}
+				</php>
+			</foreach>
+		</div>
+	</div>
+	<tc_include file="Public:footer"/>
+	<tc_include file="Public:scripts"/>
+	<script src="__TMPL__Public/assets/js/slippry.min.js"></script>
+	<script>
+	$(function() {
+		var demo1 = $("#homeslider").slippry({
+			transition: 'fade',
+			useCSS: true,
+			captions: false,
+			speed: 1000,
+			pause: 3000,
+			auto: true,
+			preload: 'visible'
+		});
+	});
+	</script>
+	{:hook('footer_end')}
+	<php>
+		$zz_settings=sp_get_option('zz_settings');
+		echo htmlspecialchars_decode($zz_settings['baidu_code']);
+		echo htmlspecialchars_decode($zz_settings['360_code']);
+	</php>
+	</body>
+</html>

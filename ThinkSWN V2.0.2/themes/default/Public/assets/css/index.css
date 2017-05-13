@@ -1,0 +1,206 @@
+.caption-wraper{
+	position: absolute;
+	left:50%;
+	bottom:2em;
+}
+.caption-wraper .caption{
+	position: relative;left:-50%;
+	background-color: rgba(0, 0, 0, 0.54);
+	padding: 0.4em 1em;
+	color:#fff;
+	-webkit-border-radius: 1.2em;
+	-moz-border-radius: 1.2em;
+	-ms-border-radius: 1.2em;
+	-o-border-radius: 1.2em;
+	border-radius: 1.2em;
+}
+@media (max-width: 767px){
+	.sy-box{margin: 12px -20px 0 -20px;}
+	.caption-wraper{left:0;bottom: 0.4em;}
+	.caption-wraper .caption{
+	left: 0;
+	padding: 0.2em 0.4em;
+	font-size: 0.92em;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	-ms-border-radius: 0;
+	-o-border-radius: 0;
+	border-radius: 0;}
+}
+a:hover,a:active{
+	color:#009933;
+}
+.block-tr{
+	width:100%;
+	display: inline-block;
+	padding-bottom:15px;
+	border-bottom: 1px solid #eee;
+}
+.block-tr .row{
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 230px;	
+}
+.block-tr .row .span2{
+	display: inline-block;
+	float:none;
+	vertical-align: top;
+}
+.block-td{
+	width: 50%;
+    display: inline-block;
+	float: left;
+	display:block;
+}
+.block-td .list{
+	width:90%;
+	line-height: 28px;
+}
+.block-td a{
+	display: block;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.block-td .list .coin{
+	color: #ff8a00;
+	margin-right:5px;
+}
+.sy-box{
+	overflow:hidden;
+	width:380px;
+	height:280px;
+}
+.sy-box .caption-wraper{
+	bottom:4em;
+}
+.sy-slide > a > img {
+	height:100%;
+	width:auto!important;
+}
+.container .main{
+	margin-top:30px;
+	width:70%;
+	display:inline-block;
+	float: left;
+	background-color:#FFFFFF;
+	padding:0px 20px;
+}
+.container .main .experts{
+	margin-left: 0px;
+}
+.container .main .experts .header h3 a{
+	color: #009933;
+	font-size:14px;
+}
+.container .main .experts .body{
+	margin:10px;
+}
+.container .main .experts .text-center{
+	margin-bottom:0px;
+}
+.container .main .experts .img-thumbnail{
+	border-radius: 50px;
+    width: 100px;
+    margin-top: 20px;
+}
+.container .main .experts .btn-primary{
+	float: none;
+    margin:auto;
+	border-color: #008151;
+    background-color: #009933;
+	color: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.container .right{
+	margin-top:30px;
+	margin-left:20px;
+	width:20%;
+	height:1354px;
+	display:inline-block;
+	float: left;
+	background-color:#FFFFFF;
+	padding:0px 20px;
+}
+.container .right .btns{
+	height:75px;
+	border: 1px solid #fbeed5;
+    padding: 20px;
+	margin-top: 20px;
+	border-radius: 4px;
+}
+.container .right .btns a{
+	border-radius: 4px;
+}
+.container .right .btns .btn-primary{
+	border-color: #008151;
+    background-color: #009933;
+}
+.container .right .notice{
+	text-align: left;
+}
+.container .right .my{
+	padding:20px 0px;
+}
+.container .right .my a{
+    width: 40%;
+    display: inline-block;
+	float: left;
+	height:30px;
+}
+.container .right .my .text-left{
+    text-align: left;	
+	padding-left:20px;
+}
+.container .right .my .text-right{
+    text-align: right;	
+	padding-right:20px;
+}
+.container .right .topic{
+	padding:0px;
+}
+.container .right .topic a{
+	display: inline-block;
+    padding: 0 8px;
+    color: #017e66;
+    background-color: #E7F2ED;
+    height: 24px;
+    line-height: 24px;
+    font-weight: 400;
+    font-size: 13px;
+    text-align: center;
+	margin-bottom: 5px;
+}
+.container .right ol.rank{
+	margin:0 0 10px 5px;
+	padding-left:10px;
+}
+.container .right ol.rank li{
+	line-height: 20px;
+	margin-bottom: 8px;
+}
+.container .right .rank .avatar{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+.container .right .rank .username{
+    color:#009933;
+	width: 100px;
+    overflow: hidden;
+    display: inline-block;
+	vertical-align: middle;
+}
+.container .right .rank .coin{
+    vertical-align: middle;
+    display: inline-block;
+}
+.container .links{
+	margin-top:20px;
+}

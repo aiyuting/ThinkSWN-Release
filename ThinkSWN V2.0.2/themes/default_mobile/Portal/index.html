@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html mip>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+		<title>{$site_name} {$site_seo_title}</title>
+		<meta name="description" content="{$site_seo_description}" />
+		<meta name="keywords" content="{$site_seo_keywords}" />
+		<link rel="stylesheet" type="text/css" href="https://mipcache.bdstatic.com/static/v1/mip.css">
+		<php>
+			$canonical=sp_get_host().$_SERVER['REQUEST_URI'];
+		</php>
+		<link rel="canonical" href="{$canonical}">
+		<style mip-custom>
+			li {
+				list-style: none;
+			}
+			body {
+				background: #fff;
+				font-size: 12px;
+				color: #000;
+				font-family: "\5B8B\4F53", arial;
+				margin: 0;
+				padding: 0;
+				text-align: center;
+				overflow-x: hidden;
+			}
+			.mip-html ol,.mip-html ul {
+				padding: 0;
+			}
+			header,section,article,aside,nav,video {
+				background: #fff;
+			}
+			
+			.topnav {
+				width: 100%;
+				height: 45px;
+				background: #009933;
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				z-index: 1000;
+			}
+			
+			.topnav .callback {
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				top: 7.5px;
+				left: 2%;
+				background-size: 30px 30px;
+			}
+			
+			.topnav .ycnav {
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				top: 7.5px;
+				right: 15%;
+				background-size: 30px 30px;
+			}
+			
+			.yxindex .ycnav {
+				position: absolute;
+				top: 7.5px;
+				right: 3%;
+			}
+			
+			.topnav .callhome {
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				top: 7.5px;
+				right: 3%;
+				background-size: 30px 30px;
+			}
+			
+			.topnav .cname {
+				text-align: center;
+				height: 45px;
+				line-height: 45px;
+				font-size: 18px;
+				color: #fff;
+				position: absolute;
+				left: 15%;
+			}
+			
+			.yxindex .cname {
+				left: 25%;
+				right:25%;
+			}
+			
+			.index {
+				margin-top: 45px;
+				width: 100%;
+			}
+			
+			.top_menu {
+				overflow: hidden;
+				overflow-x: scroll;
+				-webkit-overflow-scrolling: touch;
+				background: rgba(245, 245, 245, 0.9);
+				border-bottom: 1px solid #D9D9D9;
+				height: 36px;
+			}
+			
+			.top_menu::-webkit-scrollbar {
+				height: 0px;
+			}
+			
+			.top_menu_list {
+				white-space: nowrap;
+			}
+			
+			.top_menu_list a {
+				white-space: nowrap;
+				display: inline-block;
+				padding: 0 10px;
+				color: #333;
+				text-decoration: none;
+				font-size: 14px;
+				line-height: 26px;
+				height: 26px;
+				margin: 5px 0px 5px 5px;
+			}
+			
+			.top_menu_list a.cur {
+				color: #267ed9;
+				font-weight: 900;
+				border-radius: 5px;
+			}
+			
+			mip-carousel {
+				height: auto;
+			}
+			
+			.content {
+				width: 94%;
+				margin: 0px auto;
+			}
+			
+			.channel {
+				width: 100%;
+				padding-bottom: 2px;
+				border-bottom: 1px solid #000;
+				text-align: left;
+				margin-top: 12px;
+			}
+			
+			.channel .cname {
+				font-size: 20px;
+				font-weight: bold;
+			}
+			
+			.channel .more {
+				float: right;
+				line-height: 29px;
+				font-size: 12px;
+				color: #999;
+			}
+			
+			.slide_bt {
+				width: 100%;
+				text-align: center;
+				margin-top: 0px;
+			}
+			/*列表第二种样式*/
+			
+			.newlist2 {
+				width: 100%;
+				margin: 0px auto;
+				overflow: hidden;
+			}
+			
+			.newlist2 li {
+				height: 80px;
+				line-height: 80px;
+				padding: 10px 0px;
+				border-bottom: 1px solid #dfdfdf;
+			}
+			
+			.newlist2 li .list_img2 {
+				float: left;
+				width: 32%;
+				max-height: 80px;
+				overflow: hidden;
+			}
+			
+			.newlist2 li .list_img2 img {
+				width: 100%;
+			}
+			
+			.newlist2 li .list_cont {
+				width: 66%;
+				float: right;
+				text-align: left;
+			}
+			
+			.newlist2 li .list_title2 {
+				line-height: 30px;
+				font-size: 18px;
+				font-family: "微软雅黑";
+				font-weight: 500;
+				height: 60px;
+				overflow: hidden;
+			}
+			
+			.newlist2 li .list_title2 a {
+				font-size: 18px;
+			}
+			
+			.newlist2 li .list_time2 {
+				height: 28px;
+				line-height: 28px;
+				margin-top: -6px;
+				display: block;
+			}
+			
+			.newlist2 li .list_time2 p {
+				display: inline-block;
+				color: #999;
+				padding: 0px 2px;
+			}
+			
+			.newlist2 li .list_time2 p b {
+				background: #f05b5b;
+				color: #fff;
+				font-weight: 100;
+				font-size: 12px;
+				padding: 0px 2px;
+				margin-right: 5px;
+			}
+			
+			.list_cont span.list_fx2 {
+				float: right;
+				width: 15px;
+				height: 32px;
+				margin-right: 5px;
+				display: inline-block;
+				background-size: 15px auto;
+			}
+			
+			.mip-huan {
+				width: 100%;
+				height: 320px;
+			}
+			.footer{
+			    height: 50px;
+				line-height: 50px;
+				color: #616161;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+		  <nav class="topnav yxindex">
+			<div class="cname">{$site_name}</div>
+		  </nav>
+		</header>
+		<div class="mip-html">
+			<section class="index">
+				<php>
+					$home_slides=sp_getslide("portal_index",5,"slide_id desc");
+					$home_slides=empty($home_slides)?$default_home_slides:$home_slides;
+				</php>
+				<mip-carousel autoplay indicator buttonController layout="responsive" width="600" height="400">
+					<foreach name="home_slides" item="vo">
+						<a target="_blank" href="{$vo.slide_url}">
+							<mip-img class="mip-img" alt="{$vo.slide_name}" src="{:sp_get_asset_upload_path($vo['slide_pic'])}"></mip-img>
+							<div class="mip-carousle-subtitle">{$vo.slide_name}</div>
+						</a>
+					</foreach>
+				</mip-carousel>
+				<div class="content">
+					<div class="channel">
+						<a href="#" class="cname" target="_blank">最新推荐</a>
+					</div>
+					<div class="newlist2">
+						<ul>
+							<php>
+								$recommendnews=sp_sql_posts("field:post_date,post_title,post_excerpt,object_id,smeta,term_id;order:istop desc,recommended desc,listorder asc,post_like desc,post_hits desc,post_date desc;limit:5;where:type='article';"); 
+							</php>
+							<foreach name="recommendnews" item="vo">
+							  <php>
+								  $smeta=json_decode($vo['smeta'], true);
+							  </php>
+							  <li>
+								<div class="list_img2">
+								  <a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">
+								  <mip-img data-carousel="carousel" class="mip-element mip-img" src="{:sp_get_asset_upload_path($smeta['thumb']?$smeta['thumb']:'__TMPL__Public/assets/images/default_tupian1.png')}"></mip-img>
+								  </a>
+								</div>
+								<div class="list_cont">
+								  <div class="list_title2"><a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">{$vo.post_title}</a></div>
+								  <div class="list_time2">
+									<p><b>荐</b>{$vo.post_date}</p>
+								  </div>
+								</div>
+								<div class="clearfloat"></div>
+							  </li>
+							</foreach>
+						</ul>
+					</div>
+					<div class="channel">
+						<a href="#" class="cname" target="_blank">热门文章</a>
+					</div>
+					<div class="newlist2">
+						<ul>
+							<php>
+								$hostnews=sp_sql_posts("field:post_date,post_title,post_excerpt,object_id,smeta,term_id;order:istop desc,recommended desc,listorder asc,post_hits desc,post_date desc;limit:5;where:type='article';"); 
+							</php>
+							<foreach name="hostnews" item="vo">
+							  <php>
+								  $smeta=json_decode($vo['smeta'], true);
+							  </php>
+							  <li>
+								<div class="list_img2">
+								  <a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">
+								  <mip-img data-carousel="carousel" class="mip-element mip-img" src="{:sp_get_asset_upload_path($smeta['thumb']?$smeta['thumb']:'__TMPL__Public/assets/images/default_tupian1.png')}"></mip-img>
+								  </a>
+								</div>
+								<div class="list_cont">
+								  <div class="list_title2"><a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">{$vo.post_title}</a></div>
+								  <div class="list_time2">
+									<p><b>热</b>{$vo.post_date}</p>
+									</div>
+									<div class="clearfloat"></div>
+								</div>
+							  </li>
+							</foreach>
+						</ul>
+					</div>
+					<div class="channel">
+						<a href="#" class="cname" target="_blank">最新文章</a>
+					</div>
+					<div class="newlist2">
+						<ul>
+							<php>
+								$lastnews=sp_sql_posts("field:post_date,post_title,post_excerpt,object_id,smeta,term_id;order:listorder asc,post_date desc;limit:5;where:type='article';"); 
+							</php>
+							<foreach name="lastnews" item="vo">
+							  <php>
+								  $smeta=json_decode($vo['smeta'], true);
+							  </php>
+							  <li>
+								<div class="list_img2">
+								  <a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">
+								  <mip-img data-carousel="carousel" class="mip-element mip-img" src="{:sp_get_asset_upload_path($smeta['thumb']?$smeta['thumb']:'__TMPL__Public/assets/images/default_tupian1.png')}"></mip-img>
+								  </a>
+								</div>
+								<div class="list_cont">
+								  <div class="list_title2"><a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">{$vo.post_title}</a></div>
+								  <div class="list_time2">
+									<p><b>新</b>{$vo.post_date}</p>
+									</div>
+									<div class="clearfloat"></div>
+								</div>
+							  </li>
+							</foreach>
+						</ul>
+					</div>
+				</div>
+			</section>
+		</div>
+		<tc_include file="Public:footer" />
+	</body>
+
+</html>

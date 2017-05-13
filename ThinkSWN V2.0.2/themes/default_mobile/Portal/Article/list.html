@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html mip>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+		<title>文章列表 {$seo_title} {$site_name}</title>
+		<meta name="keywords" content="{$seo_keywords}" />
+		<meta name="description" content="{$seo_description}" />
+		<link rel="stylesheet" type="text/css" href="https://mipcache.bdstatic.com/static/v1/mip.css">
+		<php>
+			$canonical=sp_get_host().$_SERVER['REQUEST_URI'];
+		</php>
+		<link rel="canonical" href="{$canonical}">
+		<style mip-custom>
+			li {
+				list-style: none;
+			}
+			
+			body {
+				background: #fff;
+				font-size: 12px;
+				color: #000;
+				font-family: "\5B8B\4F53", arial;
+				margin: 0;
+				padding: 0;
+				text-align: center;
+				overflow-x: hidden;
+			}
+			
+			.mip-html ol,
+			.mip-html ul {
+				padding: 0;
+			}
+			
+			header,
+			section,
+			article,
+			aside,
+			nav,
+			video {
+				background: #fff;
+			}
+			
+			.topnav {
+				width: 100%;
+				height: 45px;
+				background: #009933;
+				position: fixed;
+				top: 0px;
+				left: 0px;
+				z-index: 1000;
+			}
+			
+			.topnav .ycnav {
+				width: 30px;
+				height: 30px;
+				position: absolute;
+				top: 7.5px;
+				right: 15%;
+				background-size: 30px 30px;
+			}
+			
+			.yxindex .ycnav {
+				position: absolute;
+				top: 7.5px;
+				right: 3%;
+			}
+			
+			.topnav .cname{
+				text-align: left;
+				height: 45px;
+				line-height: 45px;
+				font-size: 18px;
+				color: #fff;
+				position: absolute;
+				padding-left:10px;
+			}
+			.topnav .cname span{
+				color: #fff;
+				padding-right:10px;
+			}
+			.topnav .cname a{
+				color: #fff;
+			}
+			
+			.index {
+				margin-top: 45px;
+				width: 100%;
+			}
+			
+			.top_menu {
+				overflow: hidden;
+				overflow-x: scroll;
+				-webkit-overflow-scrolling: touch;
+				background: rgba(245, 245, 245, 0.9);
+				border-bottom: 1px solid #D9D9D9;
+				height: 36px;
+			}
+			
+			.top_menu::-webkit-scrollbar {
+				height: 0px;
+			}
+			
+			.top_menu_list {
+				white-space: nowrap;
+			}
+			
+			.top_menu_list a {
+				white-space: nowrap;
+				display: inline-block;
+				padding: 0 10px;
+				color: #333;
+				text-decoration: none;
+				font-size: 14px;
+				line-height: 26px;
+				height: 26px;
+				margin: 5px 0px 5px 5px;
+			}
+			
+			.top_menu_list a.cur {
+				color: #267ed9;
+				font-weight: 900;
+				border-radius: 5px;
+			}
+			
+			mip-carousel {
+				height: auto;
+			}
+			
+			.content {
+				width: 94%;
+				margin: 0px auto;
+			}
+			
+			.channel {
+				width: 100%;
+				padding-bottom: 2px;
+				border-bottom: 1px solid #000;
+				text-align: left;
+				margin-top: 12px;
+				margin-bottom: 12px;
+			}
+			
+			.channel .cname {
+				font-size: 20px;
+				font-weight: bold;
+			}
+			
+			.channel .more {
+				float: right;
+				line-height: 29px;
+				font-size: 12px;
+				color: #999;
+			}
+			
+			.slide_bt {
+				width: 100%;
+				text-align: center;
+				margin-top: 0px;
+			}
+			/*列表第二种样式*/
+			
+			.newlist2 {
+				width: 100%;
+				margin: 0px auto;
+				overflow: hidden;
+			}
+			
+			.newlist2 li {
+				height: 80px;
+				padding: 10px 0px;
+				border-bottom: 1px solid #dfdfdf;
+			}
+			
+			.newlist2 li .list_img2 {
+				float: left;
+				width: 32%;
+				max-height: 80px;
+				overflow: hidden;
+			}
+			
+			.newlist2 li .list_img2 img {
+				width: 100%;
+			}
+			
+			.newlist2 li .list_cont {
+				width: 66%;
+				float: right;
+				text-align: left;
+			}
+			
+			.newlist2 li .list_title2 {
+				line-height: 30px;
+				font-size: 18px;
+				font-family: "微软雅黑";
+				font-weight: 500;
+				height: 60px;
+				overflow: hidden;
+				padding-top: 6px;
+			}
+			
+			.newlist2 li .list_title2 a {
+				font-size: 18px;
+			}
+			
+			.newlist2 li .list_time2 {
+				height: 28px;
+				line-height: 28px;
+				margin-top: -6px;
+				display: none;
+			}
+			
+			.newlist2 li .list_time2 p {
+				display: inline-block;
+				color: #999;
+			}
+			
+			.newlist2 li .list_time2 p b {
+				background: #f05b5b;
+				color: #fff;
+				font-weight: 100;
+				font-size: 12px;
+				padding: 0px 2px;
+				margin-right: 5px;
+			}
+			
+			.list_cont span.list_fx2 {
+				float: right;
+				width: 15px;
+				height: 32px;
+				margin-right: 5px;
+				display: inline-block;
+				background-size: 15px auto;
+			}
+			.pagination {
+				margin: 20px;
+				text-align: center;
+			}
+
+			.pagination ul {
+				display: inline-block;
+				*display: inline;
+				margin-bottom: 0;
+				margin-left: 0;
+				-webkit-border-radius: 0;
+				-moz-border-radius: 0;
+				border-radius: 0;
+				*zoom: 1;
+				-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+				-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+				box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05)
+			}
+
+			.pagination ul>li {
+				display: inline
+			}
+
+			.pagination ul>li>a,
+			.pagination ul>li>span {
+				float: left;
+				padding: 4px 12px;
+				line-height: 20px;
+				text-decoration: none;
+				background-color: #dfdfdf;
+				border: 1px solid transparent;
+				border-left-width: 0
+			}
+
+			.pagination ul>li>a:hover,
+			.pagination ul>li>a:focus,
+			.pagination ul>.active>a,
+			.pagination ul>.active>span {
+				background-color: #428bca
+			}
+
+			.pagination ul>.active>a,
+			.pagination ul>.active>span {
+				color: #dfdfdf;
+				cursor: default
+			}
+
+			.pagination ul>.disabled>span,
+			.pagination ul>.disabled>a,
+			.pagination ul>.disabled>a:hover,
+			.pagination ul>.disabled>a:focus {
+				color: #dfdfdf;
+				cursor: default;
+				background-color: transparent
+			}
+
+			.pagination ul>li:first-child>a,
+			.pagination ul>li:first-child>span {
+				border-left-width: 1px;
+				-webkit-border-bottom-left-radius: 0;
+				border-bottom-left-radius: 0;
+				-webkit-border-top-left-radius: 0;
+				border-top-left-radius: 0;
+				-moz-border-radius-bottomleft: 0;
+				-moz-border-radius-topleft: 0
+			}
+
+			.pagination ul>li:last-child>a,
+			.pagination ul>li:last-child>span {
+				-webkit-border-top-right-radius: 0;
+				border-top-right-radius: 0;
+				-webkit-border-bottom-right-radius: 0;
+				border-bottom-right-radius: 0;
+				-moz-border-radius-topright: 0;
+				-moz-border-radius-bottomright: 0
+			}
+
+			.pagination-centered {
+				text-align: center
+			}
+
+			.pagination-right {
+				text-align: right
+			}
+
+			.pagination-large ul>li>a,
+			.pagination-large ul>li>span {
+				padding: 22px 30px;
+				font-size: 17.5px
+			}
+
+			.pagination-large ul>li:first-child>a,
+			.pagination-large ul>li:first-child>span {
+				-webkit-border-bottom-left-radius: 0;
+				border-bottom-left-radius: 0;
+				-webkit-border-top-left-radius: 0;
+				border-top-left-radius: 0;
+				-moz-border-radius-bottomleft: 0;
+				-moz-border-radius-topleft: 0
+			}
+
+			.pagination-large ul>li:last-child>a,
+			.pagination-large ul>li:last-child>span {
+				-webkit-border-top-right-radius: 0;
+				border-top-right-radius: 0;
+				-webkit-border-bottom-right-radius: 0;
+				border-bottom-right-radius: 0;
+				-moz-border-radius-topright: 0;
+				-moz-border-radius-bottomright: 0
+			}
+
+			.pagination-mini ul>li:first-child>a,
+			.pagination-small ul>li:first-child>a,
+			.pagination-mini ul>li:first-child>span,
+			.pagination-small ul>li:first-child>span {
+				-webkit-border-bottom-left-radius: 0;
+				border-bottom-left-radius: 0;
+				-webkit-border-top-left-radius: 0;
+				border-top-left-radius: 0;
+				-moz-border-radius-bottomleft: 0;
+				-moz-border-radius-topleft: 0
+			}
+
+			.pagination-mini ul>li:last-child>a,
+			.pagination-small ul>li:last-child>a,
+			.pagination-mini ul>li:last-child>span,
+			.pagination-small ul>li:last-child>span {
+				-webkit-border-top-right-radius: 0;
+				border-top-right-radius: 0;
+				-webkit-border-bottom-right-radius: 0;
+				border-bottom-right-radius: 0;
+				-moz-border-radius-topright: 0;
+				-moz-border-radius-bottomright: 0
+			}
+
+			.pagination-small ul>li>a,
+			.pagination-small ul>li>span {
+				padding: 2px 10px;
+				font-size: 11.9px
+			}
+
+			.pagination-mini ul>li>a,
+			.pagination-mini ul>li>span {
+				padding: 2px 6px;
+				font-size: 10.5px
+			}
+			.footer{
+			    height: 50px;
+				line-height: 50px;
+				color: #616161;
+				text-align: center;
+			}
+		</style>
+	</head>
+<php>
+	$answers_model=M('answers');
+</php>
+	<body>
+		<header>
+			<nav class="topnav">
+				<div class="cname">
+					<span><a href="__ROOT__/">{$site_name}</a></span>>>
+					<span>文章列表</span>
+				</div>
+			</nav>
+		</header>
+		<div class="mip-html">
+			<section class="index">
+				<div class="content">
+					<div class="newlist2">
+						<ul>
+							<php>
+								$lists = sp_sql_posts_paged("order:post_date DESC;where:type='article';",10);
+							</php>
+							<volist name="lists['posts']" id="vo">
+							<php>
+								$smeta=json_decode($vo['smeta'], true);
+							</php>
+							<li>
+								<div class="list_img2">
+									<a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">
+										<mip-img data-carousel="carousel" class="mip-element mip-img" src="{:sp_get_asset_upload_path($smeta['thumb']?$smeta['thumb']:'__TMPL__Public/assets/images/default_tupian1.png')}"></mip-img>
+									</a>
+								</div>
+								<div class="list_cont">
+									<div class="list_title2">
+										<a href="{:leuu('article/index',array('id'=>$vo['object_id']))}" target="_blank">{$vo.post_title}</a>
+									</div>
+									<div class="list_time2">
+										<p>{$vo.post_date}</p>
+									</div>
+								</div>
+								<div class="clearfloat"></div>
+							</li>
+							</volist>
+						</ul>
+					</div>
+					<div class="pagination"><ul>{$lists['page']}</ul></div>
+				</div>
+			</section>
+		</div>
+		<tc_include file="Public:footer"/>
+	</body>
+
+</html>
