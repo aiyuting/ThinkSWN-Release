@@ -269,7 +269,7 @@ ThinkCMF全体贡献者祝大家2015年大吉大利，开心幸福！《给你�
 
 全新的ThinkPHP 3.2.2架构，使用php命名空间，让开发快起来吧！
 
-* 统一前后台UI框架为simpleboot(bootstrap 2.3.2 ThinkCMF优化版)
+* 统一前后台UI框架为simpleboot(bootstrap 2.3.2 ThinkSWN优化版)
 * 集成Ucenter
 * 增加文章评论功能
 * 增加留言功能
@@ -312,7 +312,7 @@ ThinkCMF全体贡献者祝大家2015年大吉大利，开心幸福！《给你�
   
   2、您一旦安装使用ThinkSWN，即被视为完全理解并接受本协议的各项条款，在享有上述条款授予的权力的同时，受到相关的约束和限制。
   
-## 捐赠ThinkCMF
+## 捐赠ThinkSWN
 支付宝：18250621985
   
 您的每一份帮助都将支持ThinkSWN做的更好，走的更远！
